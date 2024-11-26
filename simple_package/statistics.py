@@ -20,3 +20,41 @@
 ##
 ## 5. Also, do something and/or throw an exception/message if the
 ##    numpy and matplotlib packages are not installed.
+
+import numpy as np
+
+try:
+    import numpy as np
+except ImportError:
+    raise ImportError("Numpy is not installed. Please install numpy using 'pip install numpy'.")
+
+def check_input(data):
+    if not isinstance(data, (np.ndarray, list)):
+        raise TypeError("Input data must be a numpy array or a list.")
+    if isinstance(data, list):  # If data is a list, convert it to a NumPy array
+        data = np.array(data)
+    return data
+
+def mean(data):
+    return np.mean(data)
+
+def median(data):
+    return np.median(data)
+
+def std_dev(data):
+    return np.std(data)
+
+def display_statistics(data):
+    try:
+        data = check_input(data)
+
+        mean_value = mean(data)
+        median_value = median(data)
+        std_dev_value = std_dev(data)
+
+        print(f"Statistics for the given data:")
+        print(f"Mean: {mean_value}")
+        print(f"Median: {median_value}")
+        print(f"Standard Deviation: {std_dev_value}")
+    except TypeError as e:
+        print(f"Error: {e}")

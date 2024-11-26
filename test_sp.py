@@ -16,3 +16,6 @@ if __name__ == '__main__':
     print(f"The sum of {a} and {b} is {sp.add(a,b)}")
 
 sp.calculator()
+
+data = [1, 12, 3, 4, 5, 6, 7, 7,7, 18, 9,9, 10]
+sp.plot_histogram(data)
