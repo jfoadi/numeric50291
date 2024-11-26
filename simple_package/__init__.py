@@ -1,2 +1,2 @@
 # Init file for the package
-from .operations import add, subtract, multiply, divide
+from .operations import add, subtract, multiply, divide, calculator

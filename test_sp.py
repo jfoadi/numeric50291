@@ -14,3 +14,5 @@ if __name__ == '__main__':
 
     ## Now do the same for the function in sp
     print(f"The sum of {a} and {b} is {sp.add(a,b)}")
+
+sp.calculator()

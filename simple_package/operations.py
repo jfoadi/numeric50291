@@ -36,4 +36,48 @@ def multiply(a, b):
 
 def divide(a, b):
     """Divide one number by another."""
+    if b == 0:
+        raise ValueError("Cannot divide by zero.")
     return a / b
+
+def calculator():
+    while True:
+        try:
+            # Get user's input for the operation
+            user_input = input("\nEnter operation (add, subtract, multiply, divide, exit): ").lower() # .lower() to make the input case-insensitive
+            
+            # Exit function if user enters 'exit'
+            if user_input == 'exit':
+                print("Exiting...")
+                break
+
+            # Check if the input is a valid operation
+            if user_input in ('add', 'subtract', 'multiply', 'divide'):
+                # Get the two numbers from the user
+                a = float(input("Enter first number: "))
+                b = float(input("Enter second number: "))
+
+                # Perform the operation based on user input
+                if user_input == 'add':
+                    result = add(a, b)
+                elif user_input == 'subtract':
+                    result = subtract(a, b)
+                elif user_input == 'multiply':
+                    result = multiply(a, b)
+                elif user_input == 'divide':
+                    result = divide(a, b)
+
+                # Print the result
+                print(f"Result: {result}")
+            else:
+                # Inform the user if the operation is invalid
+                print("Invalid operation. Try again.")
+
+        except ValueError as e:
+            # Handle specific "Cannot divide by zero" error
+            if str(e) == "Cannot divide by zero.":
+                print("Error: Cannot divide by zero.")
+            else:
+                # Handle other invalid numeric input errors
+                print("Invalid input. Please enter numeric values.")
+
