@@ -20,3 +20,40 @@
 ##
 ## 5. Also, do something and/or throw an exception/message if the
 ##    numpy and matplotlib packages are not installed.
+
+
+try:
+    import numpy as np
+except ImportError:
+    raise ImportError("Numpy is not installed. Please install numpy to use this package.")
+
+
+
+def check_numpy_array(data):
+    if not isinstance(data, np.ndarray):
+        data = np.array(data)
+    return data
+
+def mean(data):
+    """Calculate the mean of the data."""
+    data=check_numpy_array(data)
+    return np.mean(data)
+
+def median(data):
+    """Calculate the median of the data."""
+    data=check_numpy_array(data)
+    return np.median(data)
+
+def std_dev(data):
+    """Calculate the standard deviation of the data."""
+    data=check_numpy_array(data)
+    return np.std(data)
+
+def display_stats(data):
+    """Display the mean, median, and standard deviation of the data."""
+    data=check_numpy_array(data)
+    print(f"The mean of the data is {mean(data)}")
+    print(f"The median of the data is {median(data)}")
+    print(f"The standard deviation of the data is {std_dev(data)}")
+    
+    return mean(data), median(data), std_dev(data)
