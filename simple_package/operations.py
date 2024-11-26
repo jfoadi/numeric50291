@@ -21,28 +21,11 @@
 ## 3) Add other "operations" to the calculator, that
 ## involve complicated operations (e.g., trigonometric
 ## functions, logarithms, etc.).
-def interface_funciton():
-    while True:
-        try:
-            operation = input("Enter the operation you want to perform from 'add', 'subtract','multiply','divide': ")
-            if operation == "exit":
-                break
-            a = float(input("Enter the first number: "))
-            b = float(input("Enter the second number: "))
-            if operation == "add":
-                print(f"The sum of {a} and {b} is {add(a,b)}")
-            elif operation == "subtract":
-                print(f"The difference of {a} and {b} is {subtract(a,b)}")
-            elif operation == "multiply":
-                print(f"The product of {a} and {b} is {multiply(a,b)}")
-            elif operation == "divide":
-                print(f"The division of {a} and {b} is {divide(a,b)}")
-            else:
-                print("Invalid operation")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+import math
+import operator
+import inspect
 
-
+'''
 def add(a, b):
     """Add two numbers."""
     return a + b
@@ -78,3 +61,81 @@ def cos(a):
 def tan(a):
     """Return the tangent of a."""
     return math.tan(a)
+'''
+
+EXPOSED_FUNCTIONS_MATH = [
+    'sin', 'cos', 'tan',
+    'fabs', 'sqrt', 'log',
+    'exp', 'ceil', 'floor'
+]
+EXPOSED_FUNCTIONS_OPERATOR = [
+    'add', 'sub', 'mul',
+    'truediv', 'mod', 'pow',
+    'neg'
+]
+
+# Dynamically expose functions
+def create_wrappers():
+    namespace = {}
+    for func_name in EXPOSED_FUNCTIONS_MATH:
+        func = getattr(math, func_name)
+        namespace[func_name] = func
+
+    for func_name in EXPOSED_FUNCTIONS_OPERATOR:
+        func = getattr(operator, func_name)
+        namespace[func_name] = func
+    return namespace
+
+wrapped_functions = create_wrappers()
+
+def get_num_args(func):
+    """
+    Returns the number of positional arguments a function takes.
+
+    Args:
+        func: The callable to inspect.
+
+    Returns:
+        int: Number of positional arguments.
+    """
+    signature = inspect.signature(func)
+    return sum(
+        1 for param in signature.parameters.values()
+        if param.default == inspect.Parameter.empty and
+           param.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+    )
+
+
+
+
+def interface_funciton():
+    Stop= False
+    while not Stop:
+        try:
+            print(f"The available functions are: {EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR} or 'exit' to exit")
+            operation = input("Enter the operation you would like to perform: ")
+            if operation == 'exit':
+                Stop=True
+                continue
+            if operation not in EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR:
+                print("Invalid operation.")
+                continue
+            func = wrapped_functions[operation]
+            num_args = get_num_args(func)
+            args = []
+            for i in range(num_args):
+                args.append(float(input(f"Enter argument {i+1}: ")))
+
+            #check all args are numbers
+            for arg in args:
+                if not isinstance(arg, (int, float)):
+                    raise ValueError("All arguments must be numbers.")
+
+            result = func(*args)
+            print(f"The result of the operation {operation} on {args} is: {result}\n")
+            
+
+
+        except Exception as e:
+            print(f"Error: {e}")
+            continue

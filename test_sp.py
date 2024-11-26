@@ -21,4 +21,5 @@ print(sp.median([1,2,3,4,5]))
 print(sp.std_dev([1,2,3,4,5]))
 
 
-sp.plot_histogram([ f for f in range(100)])
+#sp.plot_histogram([ f for f in range(100)])
+sp.interface_funciton()
