@@ -20,3 +20,29 @@
 ##
 ## 5. Also, do something and/or throw an exception/message if the
 ##    numpy and matplotlib packages are not installed.
+
+try:
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    def calculate_stats(data):
+        if type(data) == list:
+            data = np.array(data)
+        elif type(data) != np.ndarray:
+            raise TypeError("Data must be a list or numpy array.")
+            
+        mean = np.mean(data)
+        median = np.median(data)
+        std = np.std(data)
+        return mean, median, std
+
+    def display_stats(mean, median, std):
+        print(f"The mean is {mean}")
+        print(f"The median is {median}")
+        print(f"The standard deviation is {std}")
+
+except ImportError:
+    print("You need to install numpy and matplotlib to use this package.")
+
+
+
