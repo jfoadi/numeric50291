@@ -25,53 +25,25 @@ import math
 import operator
 import inspect
 
-'''
-def add(a, b):
-    """Add two numbers."""
-    return a + b
-
-def subtract(a, b):
-    """Subtract one number from another."""
-    return a - b
-
-def multiply(a, b):
-    """Multiply two numbers."""
-    return a * b
-
-def divide(a, b):
-    """Divide one number by another."""
-    return a / b
 
 def log(a, b):
     """Return the logarithm of a with base b."""
     return math.log(a, b)
 
-def power(a, b):
-    """Return a raised to the power of b."""
-    return a ** b
 
-def sin(a):
-    """Return the sine of a."""
-    return math.sin(a)
-
-def cos(a):
-    """Return the cosine of a."""
-    return math.cos(a)
-
-def tan(a):
-    """Return the tangent of a."""
-    return math.tan(a)
 '''
+for some reason log doesnt work in the below seanrio so i had to hardcode it idk why
 
+'''
 EXPOSED_FUNCTIONS_MATH = [
     'sin', 'cos', 'tan',
-    'fabs', 'sqrt', 'log',
+    'fabs', 'sqrt',
     'exp', 'ceil', 'floor'
 ]
 EXPOSED_FUNCTIONS_OPERATOR = [
     'add', 'sub', 'mul',
     'truediv', 'mod', 'pow',
-    'neg'
+    'neg', 'pos', 'abs'
 ]
 
 # Dynamically expose functions
@@ -112,14 +84,20 @@ def interface_funciton():
     Stop= False
     while not Stop:
         try:
-            print(f"The available functions are: {EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR} or 'exit' to exit")
+            print(f"The available functions are: {EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR} and 'log' or 'exit' to exit")
             operation = input("Enter the operation you would like to perform: ")
             if operation == 'exit':
                 Stop=True
-                continue
-            if operation not in EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR:
+                break
+            elif operation not in EXPOSED_FUNCTIONS_MATH + EXPOSED_FUNCTIONS_OPERATOR:
                 print("Invalid operation.")
-                continue
+                
+            elif operation == 'log':
+                a = float(input("Enter the number you would like to take the logarithm of: "))
+                b = float(input("Enter the base of the logarithm: "))
+                result = log(a, b)
+                print(f"The result of the operation {operation} on {a} and {b} is: {result}\n")
+                
             func = wrapped_functions[operation]
             num_args = get_num_args(func)
             args = []
