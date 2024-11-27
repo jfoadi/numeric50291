@@ -22,7 +22,6 @@
 ##    numpy and matplotlib packages are not installed.
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 def calculate_statistics(data):
     if not isinstance(data, (np.ndarray, list)):
@@ -39,6 +38,9 @@ def calculate_statistics(data):
 def display_statistics(mean, median, std_dev):
     print(f"Mean: {mean}")
     print(f"Median: {median}")
+<<<<<<< HEAD
+    print(f"Standard Deviation: {std_dev}")
+=======
     print(f"Standard Deviation: {std_dev}")
 
 def plot_histogram(data, mean, median):
@@ -63,3 +65,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+>>>>>>> f41cb7b3d740c9f646fc85d14b640613bb8ac0bc
