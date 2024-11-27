@@ -22,18 +22,14 @@
 ## involve complicated operations (e.g., trigonometric
 ## functions, logarithms, etc.).
 
-def add(a, b):
-    """Add two numbers."""
+def add(a, b): # Addition function
     return a + b
 
-def subtract(a, b):
-    """Subtract one number from another."""
+def subtract(a, b): # Subtraction function
     return a - b
 
-def multiply(a, b):
-    """Multiply two numbers."""
+def multiply(a, b): # Multiplication function
     return a * b
 
-def divide(a, b):
-    """Divide one number by another."""
+def divide(a, b): # Division function
     return a / b
