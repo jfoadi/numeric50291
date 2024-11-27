@@ -48,6 +48,7 @@ def plot_histogram(data, mean, median):
     plt.legend()
     plt.show()
 
+''' added a test to make sure code works as desired '''
 def main():
     try:
         import numpy as np

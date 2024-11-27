@@ -3,7 +3,6 @@
 ###
 
 import simple_package.operations as op
-from simple_package.statistics import calculate_statistics
 
 if __name__ == '__main__':
     ## Define two numbers
@@ -15,8 +14,6 @@ if __name__ == '__main__':
 
     ## Now do the same for the function in sp
     print(f"The product of {a} and {b} is {op.add(a,b)}")
-
-    op.calculator_interface()
     
 
 
