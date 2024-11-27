@@ -28,7 +28,7 @@ def calculate_statistics(data):
     if not isinstance(data, (np.ndarray, list)):
         raise ValueError("Input must be a numpy array or a list")
     if isinstance(data, list):
-        data = data
+        data = np.arrry(data)
     
     mean = np.mean(data)
     median = np.median(data)
