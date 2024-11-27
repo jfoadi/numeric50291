@@ -14,6 +14,6 @@ def plot_histogram(data):  # Function to plot histogram
     plt.axvline(DataMean, color='red', linestyle='dashed', linewidth=2, label=f'Mean: {DataMean:.2f}')
     plt.axvline(DataMedian, color='purple', linestyle='dashed', linewidth=2, label=f'Median: {DataMedian:.2f}')
 
-    plt.legend()
+    plt.legend()  # Add legend to the plot
     plt.savefig('graphics.png')  # Save plot to file
     plt.close()

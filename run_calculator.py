@@ -1,6 +1,4 @@
-###
-## test package
-###
+## Running this code will use the package to use the calculator
 
 import simple_package as sp
 import numpy as np
@@ -51,7 +49,7 @@ if __name__ == '__main__':
                     print('\n*** ERROR: Invalid input, closing the helper ***')
                     quit = True
 
-            except (SyntaxError, NameError, ValueError):  # If a or b are not numbers, then give an error message
+            except (SyntaxError, NameError, ValueError, TypeError):  # If a or b are not numbers, then give an error message
                 print("\n*** ERROR: Both inputs must be numbers. ***")
 
                 QuitOrNot = input('\n> Would you like to leave the helper? (yes/no): ')
@@ -70,8 +68,7 @@ if __name__ == '__main__':
             try:
                 statsdata = eval(statsdata)  # Change from string to list 
                 statsdata  = np.array(statsdata)  # Change to numpy array
-                print('The data is fine')
-                print(statsdata)
+
                 StatsOption = input('What would you like to do with the data? (mean, median, std, histogram)')
 
                 if StatsOption == 'mean':  # If they have asked for the mean
@@ -97,7 +94,7 @@ if __name__ == '__main__':
                     print('\n*** ERROR: Invalid input, closing the helper ***')
                     quit = True
 
-            except (SyntaxError, NameError, ValueError):
+            except (SyntaxError, NameError, ValueError, TypeError):
                 print('\n*** ERROR: The data must be a list or a 1D numpy array of numbers ***')
 
         else :  # If the user has entered an invalid mode, then give an error message
