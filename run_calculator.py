@@ -21,7 +21,7 @@ if __name__ == '__main__':
             # Taking in the details needed for the wanted calculation 
             a = input("\n> Enter the first number 'a': ")
             b = input("> Enter the second number 'b': ")
-            SelectedOpperation = input("> Enter the operation you want to perform (+, -, *, /): ")
+            SelectedOpperation = input("> Enter the operation you want to perform (+, -, *, /, ^): ")
 
             try:  # Checking if a,b are numbers, if not give an error message given in the except block
 
@@ -37,6 +37,8 @@ if __name__ == '__main__':
                     print(f"\nThe product {a} * {b} is {sp.multiply(a,b)}")
                 elif SelectedOpperation == '/':  # If they have asked for division
                     print(f"\nThe divition {a} / {b} is {sp.divide(a,b)}")
+                elif SelectedOpperation == '^':  # If they have asked for power
+                    print(f"\nThe Value of {a} ^ {b} is {sp.powerof(a,b)}") 
                 else:  # If they have asked for something else
                     print("\n*** ERROR: You have entered an invalid operation. ***")
                 
@@ -49,7 +51,7 @@ if __name__ == '__main__':
                     print('\n*** ERROR: Invalid input, closing the helper ***')
                     quit = True
 
-            except ValueError:  # If a or b are not numbers, then give an error message
+            except (SyntaxError, NameError, ValueError):  # If a or b are not numbers, then give an error message
                 print("\n*** ERROR: Both inputs must be numbers. ***")
 
                 QuitOrNot = input('\n> Would you like to leave the helper? (yes/no): ')
@@ -66,11 +68,24 @@ if __name__ == '__main__':
             statsdata = input('> Please enter the data you want to use (It must be a list or a 1D numpy array!)')
 
             try:
-                statsdata = eval(statsdata)  # Cahnge from string to list 
-                statsdata  = np.array(statsdata)
-                print('This data is fine')
+                statsdata = eval(statsdata)  # Change from string to list 
+                statsdata  = np.array(statsdata)  # Change to numpy array
+                print('The data is fine')
                 print(statsdata)
+                StatsOption = input('What would you like to do with the data? (mean, median, std, histogram)')
 
+                if StatsOption == 'mean':  # If they have asked for the mean
+                    print(f'The mean of your data is: {sp.calculate_mean(statsdata)}')
+                elif StatsOption == 'median':  # If they have aksed for the median
+                    print(f'The median of your data is {sp.calculate_median(statsdata)}')
+                elif StatsOption == 'std':  # If they have aksed for the median
+                    print(f'The standard deviation of your data is {sp.calculate_std(statsdata)}')
+                elif StatsOption == 'histogram':  # If they have aksed for a histogram
+                    print(f'The plot of the histogram can be found in graphics.py')
+                    sp.plot_histogram(statsdata)
+                else:
+                    print('*** ERROR: You have entered an invalid stats operation. ***')
+                    print('Please try agian')
 
 
                 QuitOrNot = input('\n> Would you like to leave the helper? (yes/no): ')
@@ -82,7 +97,7 @@ if __name__ == '__main__':
                     print('\n*** ERROR: Invalid input, closing the helper ***')
                     quit = True
 
-            except NameError:
+            except (SyntaxError, NameError, ValueError):
                 print('\n*** ERROR: The data must be a list or a 1D numpy array of numbers ***')
 
         else :  # If the user has entered an invalid mode, then give an error message
