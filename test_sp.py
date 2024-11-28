@@ -2,15 +2,18 @@
 ## test package
 ###
 
-import simple_package as sp
+from simple_package.operations import user_interface
+from simple_package.statistics import data_input
+from simple_package.graphics import plots
 
-if __name__ == '__main__':
-    ## Define two numbers
-    a = 1;
-    b = 2;
-    
-    ## Print their sum with a nice message.
-    print(f"The sum of {a} and {b} is {a + b}")
+try: 
+    import numpy as np
+    import matplotlib.pyplot as plt
 
-    ## Now do the same for the function in sp
-    print(f"The product of {a} and {b} is {sp.add(a,b)}")
+except ImportError: 
+    print("Numpy and/or matplotlib is not installed")
+    raise SystemExit
+
+if __name__ == "__main__":
+    user_interface()
+    data_input()
